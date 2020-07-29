@@ -41,3 +41,7 @@ body{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+ngx-charts-line-chart .gridline-path {
+            stroke:#42424f !important;
+
+}
