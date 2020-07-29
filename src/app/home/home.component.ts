@@ -8,6 +8,7 @@ import { HttpcallsService } from '../httpcalls.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
   view: any[] = [600, 300];
 
   // options
