@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit {
   };
   public countryData:any;
   public globalResultSearch;
+  public flagSearch;
   constructor(private formBuilder: FormBuilder,private httpcallsService: HttpcallsService) { }
   options: string[] = [
 
@@ -182,6 +183,7 @@ export class SearchComponent implements OnInit {
   };
   onSubmit(formValues){
     console.log(formValues);
+    this.flagSearch=true;
     this.httpcallsService.getbyCountries().subscribe
       (response=>{
           {

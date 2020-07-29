@@ -93,5 +93,10 @@
             </div>
       </div>
     </div>
+  </div><!---ngif-->
+  <div class="spin" *ngIf="!globalResultSearch && flagSearch" ><!---when the globalresult is false and flag false-->
+    <div style="padding-left: 30rem;" class="fluid">
+    <mat-spinner></mat-spinner>
+  </div>   
   </div>
   
