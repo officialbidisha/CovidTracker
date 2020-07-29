@@ -14,6 +14,7 @@
               matInput
               formControlName="country"
               [matAutocomplete]="auto"
+              required
             />
           </div>
           <mat-autocomplete #auto="matAutocomplete">
@@ -31,7 +32,7 @@
           mat-raised-button
           color="accent"
           type="submit"
-          [disabled]="!countryForm.valid"
+          
         >
           Submit
         </button>
