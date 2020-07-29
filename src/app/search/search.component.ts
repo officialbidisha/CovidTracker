@@ -10,6 +10,7 @@ import { HttpcallsService } from '../httpcalls.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  
   countryForm = new FormGroup({
     country: new FormControl(''),
     
@@ -36,6 +37,7 @@ export class SearchComponent implements OnInit {
   public countryData:any;
   public globalResultSearch;
   public flagSearch;
+  public nullstring;
   constructor(private formBuilder: FormBuilder,private httpcallsService: HttpcallsService) { }
   options: string[] = [
 
@@ -188,13 +190,20 @@ export class SearchComponent implements OnInit {
       (response=>{
           {
             this.countryData=response;
+            console.log("formvalue"+formValues);
             console.log(this.countryData);
+            if(formValues===""){
+              console.log("Null");
+               this.nullstring=true;
+            }
+            else{
             for(var i=0;i<186;i++){
             
                if(this.countryData.Countries[i].Country.includes(formValues)){
                   this.globalResultSearch=this.countryData.Countries[i];
                }
             }
+          }
             console.log(this.globalResultSearch);
           }
           this.getChartData();

@@ -5,7 +5,7 @@
   >
     <div class="row" style="margin:auto">
       <div class="col-md-8">
-        <mat-form-field class="example-full-width">
+        <mat-form-field hideRequiredMarker class="example-full-width">
           <div class="form-group">
             <input
               type="text"
@@ -95,9 +95,17 @@
       </div>
     </div>
   </div><!---ngif-->
-  <div class="spin" *ngIf="!globalResultSearch && flagSearch" ><!---when the globalresult is false and flag false-->
+  <div class="spin" *ngIf="!globalResultSearch && flagSearch && !nullstring" ><!---when the globalresult is false and flag false-->
     <div class="fluid">
             <mat-spinner></mat-spinner>
     </div>   
   </div>
+  <div class="spin" *ngIf="nullstring" ><!---when the globalresult is false and flag false-->
+    <div class="fluid">
+      <div class="alert alert-light" role="alert">
+        <h4 class="alert-heading spin2"  style = "font-family:courier,arial,helvetica;">Enter a Country Name!</h4>
+      </div>
+    </div>   
+  </div>
+  
   
