@@ -1,6 +1,9 @@
 <div class="container">
   <div class="heading" style="text-align:center">
-     <h2 class="display-2">Covid Tracker</h2>
+    <a routerLink="/" routerLinkActive="active"><h2 style="display:inline-block" class="display-2">Covid Tracker &nbsp;&nbsp;&nbsp;</h2></a>
+    <a routerLink="/search" routerLinkActive="active"><span class="material-icons" style="font-size: 40px;">
+      search
+      </span></a>
      <div class="p-2"></div>
      <marquee behavior="scroll" direction="left" scrolldelay="3s" width="60%">Clean your hands often. Use soap and water, or an alcohol-based hand rub.
       &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
@@ -22,5 +25,5 @@
 </div>
 
 <div class="container">
-<app-search></app-search>
+<router-outlet></router-outlet>
 </div>

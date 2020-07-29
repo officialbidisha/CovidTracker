@@ -13,7 +13,7 @@ import { SearchComponent } from './search/search.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpcallsService } from './httpcalls.service';
-
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,8 @@ import { HttpcallsService } from './httpcalls.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [HttpcallsService],
   bootstrap: [AppComponent]

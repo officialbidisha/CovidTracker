@@ -195,7 +195,63 @@ export class SearchComponent implements OnInit {
             }
             console.log(this.globalResultSearch);
           }
+          this.getChartData();
       });
   }
-
+  getChartObjectData(result:any){
+    console.log(result);
+    let totalCasesArray=[]; 
+    
+    for(let i=0;i<result.length;i++){
+      let temp={
+        name:new Date(result[i].Date),
+        value:result[i].Confirmed
+      }
+      totalCasesArray.push(temp);
+    }
+    console.log(totalCasesArray);
+    let totalCasesObject={
+      name:"Confirmed",
+      series:totalCasesArray
+    }
+    let totalDeathsArray=[];
+    for(let i=0;i<result.length;i++){
+      let temp={
+        name:new Date(result[i].Date),
+        value:result[i].Deaths
+      }
+      totalDeathsArray.push(temp);
+    }
+    let totalDeathsObject={
+      name:"Death",
+      series:totalDeathsArray
+    }
+    let totalRecoveredArray=[];
+    for(let i=0;i<result.length;i++){
+      let temp={
+        name:new Date(result[i].Date),
+        value:result[i].Recovered
+      }
+      totalRecoveredArray.push(temp);
+    }
+    let totalRecoveredObject={
+      name:"Recovery",
+      series:totalRecoveredArray
+    }
+    console.log(totalCasesObject);console.log(totalDeathsObject);console.log(totalRecoveredObject);
+    let chartInfo=[];
+    chartInfo.push(totalCasesObject);
+    chartInfo.push(totalDeathsObject);
+    chartInfo.push(totalRecoveredObject);
+    return chartInfo;
+  }
+  multi:any;
+  getChartData(){
+    this.httpcallsService.getChartDataByCountries(this.globalResultSearch.Slug).subscribe((result:any)=>{
+           this.multi=this.getChartObjectData(result);
+    })
+    
+}
+public yAxisTickFormattingFn = this.yAxisTickFormatting.bind(this); public xAxisTickFormattingFn = this.xAxisTickFormatting.bind(this); yAxisTickFormatting(value) { return "";}
+   xAxisTickFormatting(value){ return "" ;} 
 }

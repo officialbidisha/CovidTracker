@@ -3,6 +3,8 @@
     max-width: 500px;
     width: 100%;
     color:white;
+    text-align:center;
+    margin:auto;
   }
   
   .example-full-width {
@@ -34,3 +36,8 @@
       color:#1f8ef1;
   }
 }
+.box{
+   
+    margin-bottom:20px;
+}
+::ng-deep .ngx-charts { fill: #e0e0e0; float: none !important;}
