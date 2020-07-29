@@ -1,0 +1,36 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    color:white;
+  }
+  
+  .example-full-width {
+    color:white;
+    width: 100%;
+     
+  }
+  ::ng-deep .mat-form-field {
+    .mat-input-element {/*filled up Input text*/
+        color: #adb5bd;
+        font-size: 20px;
+    }
+    .mat-form-field-label {/*placeholder*/
+        color:#adb5bd;
+        
+    }
+    .mat-form-field-underline {
+        background-color: #adb5be;/*underline*/
+    }
+}
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+      color:whitesmoke;
+  }
+  .mat-form-field-required-marker {
+      color: #1f8ef1;
+  }
+  .mat-input-element {
+      color:#1f8ef1;
+  }
+}

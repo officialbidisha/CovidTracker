@@ -13,5 +13,9 @@ export class HttpcallsService {
   getChartDataByCountries(slug:any){
     return this.https.get("https://api.covid19api.com/total/country/"+slug);
   }
+  getCountrySpecific(country){
+    console.log("country"+country);
+    return this.https.get("https://api.covid19api.com/country/"+country+"/status/confirmed");
+  }
 }
 
