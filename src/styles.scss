@@ -80,4 +80,7 @@ ngx-charts-line-chart .gridline-path {
             }
         }
     }
+    .legend-wrap{
+        width: calc(100% - 20px) !important;
+    }
 }
