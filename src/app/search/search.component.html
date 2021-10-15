@@ -1,118 +1,105 @@
-  <form
-    class="example-form"
-    [formGroup]="countryForm"
-    (ngSubmit)="onSubmit(countryForm.value.country)"
-  >
-    <div class="row" style="margin:auto">
-      <div class="col-md-8">
-        <mat-form-field hideRequiredMarker class="example-full-width">
-          <div class="form-group">
-            <input
-              type="text"
-              placeholder="Country"
-              aria-label="Number"
-              matInput
-              formControlName="country"
-              [matAutocomplete]="auto"
-              required
-            />
-          </div>
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
-            >
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <button
-          mat-raised-button
-          color="accent"
-          type="submit"
-          
-        >
-          Submit
-        </button>
-      </div>
+<form
+  class="example-form"
+  [formGroup]="countryForm"
+  (ngSubmit)="onSubmit(countryForm.value.country)"
+>
+  <div class="row" style="margin: auto">
+    <div class="col-md-8">
+      <mat-form-field hideRequiredMarker class="example-full-width">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Country"
+            aria-label="Number"
+            matInput
+            formControlName="country"
+            [matAutocomplete]="auto"
+            required
+          />
+        </div>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
-  </form>
-  <div class="p-3"></div>
-  <div class="contains" *ngIf="globalResultSearch">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="box">
-          <div>
-            <div class="item">
-              <div class="item-name">
-                Country Name:
-              </div>
-              <div class="item-content">
-                {{ globalResultSearch.Country }}
-              </div>
+    <div class="col-md-4">
+      <button mat-raised-button color="accent" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
+<div class="p-3"></div>
+<div class="contains" *ngIf="globalResultSearch">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="box">
+        <div>
+          <div class="item">
+            <div class="item-name">Country Name:</div>
+            <div class="item-content">
+              {{ globalResultSearch.Country }}
             </div>
-            <div class="item">
-              <div class="item-name">
-                Date:
-              </div>
-              <div class="item-content">
-                {{ globalResultSearch.Date | date: "MMM d, y" }}
-              </div>
+          </div>
+          <div class="item">
+            <div class="item-name">Date:</div>
+            <div class="item-content">
+              {{ globalResultSearch.Date | date: "MMM d, y" }}
             </div>
-            <div class="item">
-              <div class="item-name">
-                Number of Infected:
-              </div>
-              <div class="item-content">
-                {{ globalResultSearch.TotalConfirmed }}
-              </div>
+          </div>
+          <div class="item">
+            <div class="item-name">Number of Infected:</div>
+            <div class="item-content">
+              {{ globalResultSearch.TotalConfirmed }}
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-8">
-            <div class="box">
-              <ngx-charts-line-chart
-                    
-              [scheme]="colorScheme"
-              [legend]="legend"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxis]="xAxis"
-              [yAxis]="yAxis"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [timeline]="timeline"
-              [results]="multi"
-              [gradient]="gradient"
-              [showGridLines]="true"
-              [roundDomains]="true"
-              >
+    </div>
+    <div class="col-md-8">
+      <div class="box">
+        <div class="line-chart">
+          <ngx-charts-line-chart
+            [scheme]="colorScheme"
+            [legend]="legend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxis]="xAxis"
+            [yAxis]="yAxis"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            [results]="multi"
+            [gradient]="gradient"
+            [showGridLines]="true"
+            [roundDomains]="true"
+          >
           </ngx-charts-line-chart>
-            </div>
+        </div>
       </div>
     </div>
-  </div><!---ngif-->
-  <div class="spin" *ngIf="!globalResultSearch && flagSearch && !nullstring" ><!---when the globalresult is false and flag false-->
+  </div>
+</div>
+<!---ngif-->
+<div class="spin" *ngIf="!globalResultSearch && flagSearch && !nullstring">
+  <!---when the globalresult is false and flag false-->
+  <div class="fluid">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="spin" *ngIf="nullstring">
+  <!---when the globalresult is false and flag false-->
+  <div class="spin2">
     <div class="fluid">
-            <mat-spinner></mat-spinner>
-    </div>   
-  </div>
-  <div class="spin" *ngIf="nullstring" ><!---when the globalresult is false and flag false-->
-    <div class="spin2">
-
-      <div class="fluid ">
-        <div class="card" style="width: 25rem; height:5rem; color:black; justify-content: center; text-align: center;">
-          <div class="card-body">
-            <h2 class="card-text" style="color:whitesmoke">Please Choose a Country</h2>
-          </div>
+      <div
+        class="card"
+      >
+        <div class="card-body">
+          <h2 class="card-text">
+            Please Choose a Country
+          </h2>
         </div>
-      </div>   
-
+      </div>
     </div>
-    
   </div>
-  
-  
+</div>

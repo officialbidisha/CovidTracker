@@ -39,6 +39,9 @@
 .box {
   margin-bottom: 20px;
 }
+.line-chart {
+  height: 50vh;
+}
 ::ng-deep .ngx-charts {
   fill: #e0e0e0;
   float: none !important;
@@ -53,4 +56,16 @@
 }
 .card {
   background-color: #959ca5;
+  width: 25rem;
+  height: 5rem;
+  color: black;
+  justify-content: center;
+  text-align: center;
+  .card-text {
+    color: whitesmoke;
+  }
+}
+
+.cdk-overlay-pane {
+  background: rgba(#1e1e2f, 0.8);
 }

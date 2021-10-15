@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpcallsService {
+  constructor(private https: HttpClient) {}
 
-  constructor(private https: HttpClient) { }
-  getbyCountries(){
-    return this.https.get("https://api.covid19api.com/summary");
+  getCountries(): Observable<any> {
+    return this.https.get('https://api.covid19api.com/countries');
   }
-  getChartDataByCountries(slug:any){
-    return this.https.get("https://api.covid19api.com/total/country/"+slug);
+  getbyCountries(): Observable<any> {
+    return this.https.get('https://api.covid19api.com/summary');
   }
-  getCountrySpecific(country){
-    console.log("country"+country);
-    return this.https.get("https://api.covid19api.com/country/"+country+"/status/confirmed");
+  getChartDataByCountries(slug: any): Observable<any> {
+    return this.https.get('https://api.covid19api.com/total/country/' + slug);
+  }
+  getCountrySpecific(country): Observable<any> {
+    return this.https.get(
+      'https://api.covid19api.com/country/' + country + '/status/confirmed'
+    );
   }
 }
-
