@@ -2,8 +2,6 @@
 body {
   background-color: #1e1e2f;
   color: #adb5bd;
-  /*color:black
-    */
 }
 .box {
   margin: 0px 20px; /*space outside container*/
@@ -29,7 +27,6 @@ body {
 .item .item-name {
   font-size: 0.9rem;
   opacity: 0.8rem;
-  //color:rgb(255, 20, 147);
 }
 .item .item-content {
   font-size: 2.2rem;
@@ -93,32 +90,54 @@ ngx-charts-line-chart .gridline-path {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
+  // border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(#1e1e2f, 0.2);
+  background: #1e1e2f;
   border-radius: 5px;
-  max-height: 10px;
+  max-height: 30px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(#1e1e2f, 0.4);
+  background: #1e1e2f;
 }
-// }
-.mat-autocomplete-panel.mat-autocomplete-visible{
+.mat-autocomplete-panel.mat-autocomplete-visible {
   background-color: #1e1e2f !important;
-  .mat-option-text{
+  .mat-option-text {
     color: white;
   }
-  .mat-selected:not(.mat-active):not(:hover){
+  .mat-selected:not(.mat-active):not(:hover) {
     background: rgba(#1e1e2f, 0.2);
   }
+}
+.mat-select-value {
+  color: rgb(31, 142, 241) !important;
+}
+.mat-button-disabled {
+  color: white !important;
+}
+
+.table-icon {
+  position: absolute;
+  top: 31px;
+  margin-left: 35px;
+}
+.mat-select-panel:not([class*="mat-elevation-z"]) {
+  background-color: #1e1e2f;
+  border: 10px;
+}
+.mat-option-text {
+  color: white !important;
+}
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: #45456e;
 }

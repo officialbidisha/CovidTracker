@@ -1,0 +1,35 @@
+.summary-table {
+  table {
+    width: 100%;
+    background-color: rgba(#1e1e2f, 0.4);
+  }
+  .mat-header-cell,
+  .mat-cell {
+    color: rgb(31, 142, 241);
+    border-bottom: 1px solid rgba(31, 142, 241, 0.2);
+  }
+  .mat-header-cell {
+    background: #1e1e2f;
+    color: white;
+  }
+  .mat-paginator {
+    background-color: rgba(#1e1e2f, 0.4);
+    color: rgb(31, 142, 241);
+    .mat-select-value-text {
+      color: rgb(31, 142, 241) !important;
+    }
+  }
+  th.mat-sort-header-sorted {
+    color: rgb(31, 142, 241);
+  }
+
+  padding: 10px;
+  padding-bottom: 20px;
+}
+.spin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
+}
