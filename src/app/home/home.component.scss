@@ -1,5 +1,6 @@
 .box {
   margin-bottom: 20px;
+  // height: 680px;
 }
 ::ng-deep .ngx-charts {
   fill: #e0e0e0;
@@ -15,4 +16,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100vh;
+}
+.chart-box{
+  height: 350px;
 }
