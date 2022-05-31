@@ -16,8 +16,14 @@ body {
 }
 
 .heading {
-  margin-top: 25px;
-  margin-bottom: 30px;
+  padding-top: 25px;
+  padding-bottom: 6px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #1e1e2f;
+  z-index: 105;
 }
 .heading h2 {
   font-weight: 500;
@@ -141,8 +147,12 @@ ngx-charts-line-chart .gridline-path {
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
   background: #45456e;
 }
-.mat-select-arrow-wrapper{
-  .mat-select-arrow{
+.mat-select-arrow-wrapper {
+  .mat-select-arrow {
     color: white;
   }
+}
+
+.container {
+  margin-top: 140px;
 }
