@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,33 +21,26 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SearchComponent,
-    CasesSummaryComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgxChartsModule,
-    BrowserAnimationsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatDialogModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTooltipModule
-  ],
-  providers: [HttpcallsService],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        SearchComponent,
+        CasesSummaryComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        NgxChartsModule,
+        BrowserAnimationsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTooltipModule], providers: [HttpcallsService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
