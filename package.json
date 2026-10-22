@@ -21,7 +21,7 @@
     "@angular/router": "^22.2.3",
     "@swimlane/ngx-charts": "^25.0.3",
     "bootstrap": "^4.6.0",
-    "rxjs": "~6.6.0",
+    "rxjs": "~7.8.2",
     "tslib": "^2.1.0",
     "zone.js": "~0.15.1"
   },
@@ -40,5 +40,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~6.0.3"
+  },
+  "overrides": {
+    "vite": "^7.3.7"
   }
 }
