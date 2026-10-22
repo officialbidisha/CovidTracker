@@ -1,0 +1,15 @@
+
+.data-notice {
+  max-width: 900px;
+  margin: 10px auto 0;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: #adb5bd;
+  background: rgba(31, 142, 241, 0.08);
+  border: 1px solid rgba(31, 142, 241, 0.25);
+  border-radius: 8px;
+  strong {
+    color: #e9edf1;
+  }
+}

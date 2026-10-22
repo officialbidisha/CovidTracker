@@ -2,25 +2,32 @@
   table {
     width: 100%;
     background-color: rgba(#1e1e2f, 0.4);
+    --mat-table-background-color: transparent;
+    --mat-table-row-item-label-text-color: rgb(31, 142, 241);
+    --mat-table-header-headline-color: white;
   }
-  .mat-header-cell,
-  .mat-cell {
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
     color: rgb(31, 142, 241);
     border-bottom: 1px solid rgba(31, 142, 241, 0.2);
   }
-  .mat-header-cell {
+  .mat-mdc-header-cell {
     background: #1e1e2f;
     color: white;
   }
-  .mat-paginator {
-    background-color: rgba(#1e1e2f, 0.4);
-    color: rgb(31, 142, 241);
-    .mat-select-value-text {
-      color: rgb(31, 142, 241) !important;
-    }
+  .mat-mdc-paginator {
+    --mat-paginator-container-background-color: rgba(30, 30, 47, 0.4);
+    --mat-paginator-container-text-color: rgb(31, 142, 241);
+    --mat-paginator-enabled-icon-color: rgb(31, 142, 241);
   }
   th.mat-sort-header-sorted {
     color: rgb(31, 142, 241);
+  }
+  .mat-column-position,
+  .mat-column-confirmed,
+  .mat-column-recovered,
+  .mat-column-deaths {
+    font-variant-numeric: tabular-nums;
   }
 
   padding: 10px;

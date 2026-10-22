@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -10,9 +11,11 @@ import { HttpcallsService } from "../httpcalls.service";
 import { MatSort } from "@angular/material/sort";
 
 @Component({
-  selector: "app-cases-summary",
-  templateUrl: "./cases-summary.component.html",
-  styleUrls: ["./cases-summary.component.scss"],
+    selector: "app-cases-summary",
+    templateUrl: "./cases-summary.component.html",
+    styleUrls: ["./cases-summary.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class CasesSummaryComponent implements OnInit, AfterViewInit {
   public loaded = false;
@@ -60,7 +63,7 @@ export class CasesSummaryComponent implements OnInit, AfterViewInit {
           position: i + 1,
           country: this.country[i],
           confirmed: this.totalConfirmed[i],
-          recovered: this.totalConfirmed[i] - this.totalDeaths[i],
+          recovered: this.totalRecovered[i],
           deaths: this.totalDeaths[i],
         };
         this.dtSource.push(obj);

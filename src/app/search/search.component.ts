@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpcallsService } from '../httpcalls.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class SearchComponent implements OnInit {
-  public countryForm = new FormGroup({
-    country: new FormControl(''),
+  public countryForm = new UntypedFormGroup({
+    country: new UntypedFormControl(''),
   });
   public view: any[] = [600, 300];
 
@@ -42,18 +44,28 @@ export class SearchComponent implements OnInit {
   public yAxisTickFormattingFn = this.yAxisTickFormatting.bind(this);
   public xAxisTickFormattingFn = this.xAxisTickFormatting.bind(this);
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private httpcallsService: HttpcallsService
   ) {}
   public options: string[] = [];
   filteredOptions: Observable<string[]>;
 
+  public error = false;
+  public notFound = false;
+
   ngOnInit() {
-    this.httpcallsService.getCountries().subscribe((res) => {
-      const result: any = res;
-      for (const i of result) {
-        this.options.push(i.Country);
-      }
+    this.httpcallsService.getCountries().subscribe({
+      next: (res) => {
+        const result: any = res;
+        for (const i of result) {
+          this.options.push(i.Country);
+        }
+        // Re-emit so the autocomplete shows the list once it has loaded.
+        this.countryForm.controls.country.updateValueAndValidity();
+      },
+      error: () => {
+        this.error = true;
+      },
     });
 
     this.filteredOptions = this.countryForm.controls.country.valueChanges.pipe(
@@ -63,27 +75,43 @@ export class SearchComponent implements OnInit {
   }
 
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = (value || '').toLowerCase();
     return this.options.filter((option) =>
       option.toLowerCase().includes(filterValue)
     );
   }
+
   onSubmit(formValues) {
+    const query = (formValues || '').trim();
     this.flagSearch = true;
-    this.httpcallsService.getbyCountries().subscribe((response) => {
-      {
+    this.error = false;
+    this.notFound = false;
+    this.globalResultSearch = undefined;
+    this.multi = undefined;
+    if (query === '') {
+      this.nullstring = true;
+      return;
+    }
+    this.nullstring = false;
+    this.httpcallsService.getbyCountries().subscribe({
+      next: (response) => {
         this.countryData = response;
-        if (formValues === '') {
-          this.nullstring = true;
-        } else {
-          for (let i = 0; i < 186; i++) {
-            if (this.countryData.Countries[i].Country.includes(formValues)) {
-              this.globalResultSearch = this.countryData.Countries[i];
-            }
-          }
+        const q = query.toLowerCase();
+        const countries: any[] = this.countryData.Countries;
+        // Prefer an exact name match, otherwise the first partial match.
+        const match =
+          countries.find((c) => c.Country.toLowerCase() === q) ||
+          countries.find((c) => c.Country.toLowerCase().includes(q));
+        if (!match) {
+          this.notFound = true;
+          return;
         }
-      }
-      this.getChartData();
+        this.globalResultSearch = match;
+        this.getChartData();
+      },
+      error: () => {
+        this.error = true;
+      },
     });
   }
   getChartObjectData(result: any) {
@@ -134,8 +162,13 @@ export class SearchComponent implements OnInit {
   getChartData() {
     this.httpcallsService
       .getChartDataByCountries(this.globalResultSearch?.Slug)
-      .subscribe((result: any) => {
-        this.multi = this.getChartObjectData(result);
+      .subscribe({
+        next: (result: any) => {
+          this.multi = this.getChartObjectData(result);
+        },
+        error: () => {
+          this.multi = [];
+        },
       });
   }
 

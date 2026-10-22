@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpcallsService } from '../httpcalls.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   public view: any[] = [600, 300];
@@ -42,38 +44,42 @@ export class HomeComponent implements OnInit {
 
   constructor(private httpcall: HttpcallsService) {}
 
+  public error = false;
+
   ngOnInit(): void {
-    this.httpcall.getbyCountries().subscribe((result: any) => {
-      const countries = result.Countries;
-      let first = 0;
-      let second = 0;
-      let third = 0;
-      let index1 = -1;
-      let index2 = -1;
-      let index3 = -1;
-      for (let i = 0; i < countries.length; i++) {
-        if (countries[i].TotalConfirmed >= first) {
-          third = second;
-          index3 = index2;
-          second = first;
-          index2 = index1;
-          first = countries[i].TotalConfirmed;
-          index1 = i;
-        } else if (countries[i].TotalConfirmed >= second) {
-          third = second;
-          index3 = index2;
-          second = countries[i].TotalConfirmed;
-          index2 = i;
-        } else if (countries[i].TotalConfirmed >= third) {
-          third = countries[i].TotalConfirmed;
-          index3 = i;
-        }
-      }
-      this.top1 = index1;
-      this.top2 = index2;
-      this.top3 = index3;
-      this.globalresult = result;
-      this.getChartData();
+    this.load();
+  }
+
+  /** One card per top-3 country; the chart series arrives separately. */
+  get cards() {
+    if (!this.globalresult) {
+      return [];
+    }
+    const countries = this.globalresult.Countries;
+    return [
+      { rank: '1st', country: countries[this.top1], series: this.multi1 },
+      { rank: '2nd', country: countries[this.top2], series: this.multi2 },
+      { rank: '3rd', country: countries[this.top3], series: this.multi3 },
+    ];
+  }
+
+  public load(): void {
+    this.error = false;
+    this.httpcall.getbyCountries().subscribe({
+      next: (result: any) => {
+        // Rank by total confirmed cases (descending) and keep the top three.
+        const ranked = result.Countries
+          .map((c: any, i: number) => ({ i, n: c.TotalConfirmed }))
+          .sort((a: any, b: any) => b.n - a.n);
+        this.top1 = ranked[0].i;
+        this.top2 = ranked[1].i;
+        this.top3 = ranked[2].i;
+        this.globalresult = result;
+        this.getChartData();
+      },
+      error: () => {
+        this.error = true;
+      },
     });
   }
 
@@ -122,21 +128,16 @@ export class HomeComponent implements OnInit {
   }
 
   public getChartData() {
-    this.httpcall
-      .getChartDataByCountries(this.globalresult.Countries[this.top1].Slug)
-      .subscribe((result: any) => {
-        this.multi1 = this.getChartObjectData(result);
-      });
-    this.httpcall
-      .getChartDataByCountries(this.globalresult.Countries[this.top2].Slug)
-      .subscribe((result: any) => {
-        this.multi2 = this.getChartObjectData(result);
-      });
-    this.httpcall
-      .getChartDataByCountries(this.globalresult.Countries[this.top3].Slug)
-      .subscribe((result: any) => {
-        this.multi3 = this.getChartObjectData(result);
-      });
+    const load = (idx: number, assign: (series: any) => void) =>
+      this.httpcall
+        .getChartDataByCountries(this.globalresult.Countries[idx].Slug)
+        .subscribe({
+          next: (result: any) => assign(this.getChartObjectData(result)),
+          error: () => assign([]),
+        });
+    load(this.top1, (series) => (this.multi1 = series));
+    load(this.top2, (series) => (this.multi2 = series));
+    load(this.top3, (series) => (this.multi3 = series));
   }
 
   yAxisTickFormatting(value) {
