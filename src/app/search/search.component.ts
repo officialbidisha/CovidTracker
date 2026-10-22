@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpcallsService } from '../httpcalls.service';
@@ -10,8 +10,8 @@ import { HttpcallsService } from '../httpcalls.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  public countryForm = new FormGroup({
-    country: new FormControl(''),
+  public countryForm = new UntypedFormGroup({
+    country: new UntypedFormControl(''),
   });
   public view: any[] = [600, 300];
 
@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
   public yAxisTickFormattingFn = this.yAxisTickFormatting.bind(this);
   public xAxisTickFormattingFn = this.xAxisTickFormatting.bind(this);
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private httpcallsService: HttpcallsService
   ) {}
   public options: string[] = [];
