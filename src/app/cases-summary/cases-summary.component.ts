@@ -10,9 +10,10 @@ import { HttpcallsService } from "../httpcalls.service";
 import { MatSort } from "@angular/material/sort";
 
 @Component({
-  selector: "app-cases-summary",
-  templateUrl: "./cases-summary.component.html",
-  styleUrls: ["./cases-summary.component.scss"],
+    selector: "app-cases-summary",
+    templateUrl: "./cases-summary.component.html",
+    styleUrls: ["./cases-summary.component.scss"],
+    standalone: false
 })
 export class CasesSummaryComponent implements OnInit, AfterViewInit {
   public loaded = false;
