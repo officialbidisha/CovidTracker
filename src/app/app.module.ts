@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -42,5 +42,5 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatTooltipModule], providers: [HttpcallsService, provideHttpClient(withInterceptorsFromDi())] })
+        MatTooltipModule], providers: [HttpcallsService, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule { }

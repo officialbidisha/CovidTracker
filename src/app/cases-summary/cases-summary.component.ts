@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -13,6 +14,7 @@ import { MatSort } from "@angular/material/sort";
     selector: "app-cases-summary",
     templateUrl: "./cases-summary.component.html",
     styleUrls: ["./cases-summary.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CasesSummaryComponent implements OnInit, AfterViewInit {
