@@ -116,20 +116,13 @@ ngx-charts-line-chart .gridline-path {
 ::-webkit-scrollbar-thumb:hover {
   background: #1e1e2f;
 }
-.mat-autocomplete-panel.mat-autocomplete-visible {
-  background-color: #1e1e2f !important;
-  .mat-option-text {
-    color: white;
-  }
-  .mat-selected:not(.mat-active):not(:hover) {
-    background: rgba(#1e1e2f, 0.2);
-  }
-}
-.mat-select-value {
-  color: rgb(31, 142, 241) !important;
-}
-.mat-button-disabled {
-  color: white !important;
+/* Angular Material (MDC) autocomplete panel, dark theme */
+.mat-mdc-autocomplete-panel {
+  --mat-autocomplete-background-color: #1e1e2f;
+  --mat-option-label-text-color: #fff;
+  --mat-option-hover-state-layer-color: rgba(255, 255, 255, 0.08);
+  --mat-option-focus-state-layer-color: rgba(255, 255, 255, 0.12);
+  --mat-option-selected-state-layer-color: #45456e;
 }
 
 .table-icon {
@@ -137,22 +130,6 @@ ngx-charts-line-chart .gridline-path {
   top: 31px;
   margin-left: 35px;
 }
-.mat-select-panel:not([class*="mat-elevation-z"]) {
-  background-color: #1e1e2f;
-  border: 10px;
-}
-.mat-option-text {
-  color: white !important;
-}
-.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-  background: #45456e;
-}
-.mat-select-arrow-wrapper {
-  .mat-select-arrow {
-    color: white;
-  }
-}
-
 .container {
-  margin-top: 140px;
+  margin-top: 170px;
 }

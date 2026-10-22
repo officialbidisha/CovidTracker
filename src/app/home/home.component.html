@@ -1,170 +1,74 @@
 @if (globalresult) {
   <div class="contains">
     <div class="row">
-      <div class="col-md-4">
-        <div class="box">
-          <div>
-            <span class="badge badge-light">1st</span>
+      @for (card of cards; track card.rank) {
+        <div class="col-md-4">
+          <div class="box">
+            <span class="badge badge-light">{{ card.rank }}</span>
             <div class="p-2"></div>
             <div class="item">
               <div class="item-name">Country Name:</div>
-              <div class="item-content">
-                {{
-                globalresult.Countries[top1].Country.length > 11
-                ? globalresult.Countries[top1].CountryCode
-                : globalresult.Countries[top1].Country
-                }}
+              <div class="item-content country-name">
+                @if (card.country.Flag) {
+                  <img class="flag" [src]="card.country.Flag" alt="" width="36" height="24" />
+                }
+                {{ card.country.Country.length > 11 ? card.country.CountryCode : card.country.Country }}
               </div>
             </div>
             <div class="item">
-              <div class="item-name">Date:</div>
+              <div class="item-name">Data as of:</div>
               <div class="item-content">
-                {{ globalresult.Countries[top1].Date | date: "MMM d, y" }}
+                {{ card.country.Date ? (card.country.Date | date: "MMM d, y") : "—" }}
               </div>
             </div>
             <div class="item">
               <div class="item-name">Number of Infected:</div>
-              <div class="item-content">
-                {{ globalresult.Countries[top1].TotalConfirmed }}
-              </div>
+              <div class="item-content">{{ card.country.TotalConfirmed | number }}</div>
+            </div>
+            <div class="item">
+              <div class="item-name">Deaths:</div>
+              <div class="item-content secondary">{{ card.country.TotalDeaths | number }}</div>
             </div>
           </div>
         </div>
-        <!--name card ends-->
-      </div>
-      <div class="col-md-8">
-        <div class="box">
-          <div class="chart-box">
-            <ngx-charts-line-chart
-              [scheme]="colorScheme"
-              [legend]="legend"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxis]="xAxis"
-              [yAxis]="yAxis"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [timeline]="timeline"
-              [results]="multi1"
-              [gradient]="gradient"
-              [showGridLines]="true"
-              [roundDomains]="true"
-              >
-            </ngx-charts-line-chart>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="box">
-          <div>
-            <span class="badge badge-light">2nd</span>
-            <div class="p-2"></div>
-            <div class="item">
-              <div class="item-name">Country Name:</div>
-              <div class="item-content">
-                {{
-                globalresult.Countries[top2].Country.length > 11
-                ? globalresult.Countries[top2].CountryCode
-                : globalresult.Countries[top2].Country
-                }}
-              </div>
-            </div>
-            <div class="item">
-              <div class="item-name">Date:</div>
-              <div class="item-content">
-                {{ globalresult.Countries[top2].Date | date: "MMM d, y" }}
-              </div>
-            </div>
-            <div class="item">
-              <div class="item-name">Number of Infected:</div>
-              <div class="item-content">
-                {{ globalresult.Countries[top2].TotalConfirmed }}
-              </div>
+        <div class="col-md-8">
+          <div class="box">
+            <div class="chart-box">
+              @if (card.series) {
+                <ngx-charts-line-chart
+                  [scheme]="colorScheme"
+                  [legend]="legend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxis]="xAxis"
+                  [yAxis]="yAxis"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  [timeline]="timeline"
+                  [results]="card.series"
+                  [gradient]="gradient"
+                  [showGridLines]="true"
+                  [roundDomains]="true"
+                  >
+                </ngx-charts-line-chart>
+              } @else {
+                <div class="chart-loading"><mat-spinner diameter="36"></mat-spinner></div>
+              }
             </div>
           </div>
         </div>
-        <!--name card ends-->
-      </div>
-      <div class="col-md-8">
-        <div class="box">
-          <div class="chart-box">
-            <ngx-charts-line-chart
-              [scheme]="colorScheme"
-              [legend]="legend"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxis]="xAxis"
-              [yAxis]="yAxis"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [timeline]="timeline"
-              [results]="multi2"
-              [gradient]="gradient"
-              [showGridLines]="true"
-              [roundDomains]="true"
-              >
-            </ngx-charts-line-chart>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="box">
-          <div>
-            <span class="badge badge-light">3rd</span>
-            <div class="p-2"></div>
-            <div class="item">
-              <div class="item-name">Country Name:</div>
-              <div class="item-content">
-                {{
-                globalresult.Countries[top3].Country.length > 11
-                ? globalresult.Countries[top3].CountryCode
-                : globalresult.Countries[top3].Country
-                }}
-              </div>
-            </div>
-            <div class="item">
-              <div class="item-name">Date:</div>
-              <div class="item-content">
-                {{ globalresult.Countries[top3].Date | date: "MMM d, y" }}
-              </div>
-            </div>
-            <div class="item">
-              <div class="item-name">Number of Infected:</div>
-              <div class="item-content">
-                {{ globalresult.Countries[top3].TotalConfirmed }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--name card ends-->
-      </div>
-      <div class="col-md-8">
-        <div class="box">
-          <div class="chart-box">
-            <ngx-charts-line-chart
-              [scheme]="colorScheme"
-              [legend]="legend"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxis]="xAxis"
-              [yAxis]="yAxis"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [timeline]="timeline"
-              [results]="multi3"
-              [gradient]="gradient"
-              [showGridLines]="true"
-              [roundDomains]="true"
-              >
-            </ngx-charts-line-chart>
-          </div>
-        </div>
-      </div>
+      }
     </div>
   </div>
-}
-<!---contains ended-->
-@if (!globalresult) {
+} @else if (error) {
+  <div class="spin">
+    <div class="state-card" role="alert">
+      <h2>Couldn't load the data</h2>
+      <p>The data service didn't respond. Check your connection and try again.</p>
+      <button mat-raised-button color="accent" type="button" (click)="load()">Retry</button>
+    </div>
+  </div>
+} @else {
   <div class="spin">
     <div class="fluid">
       <mat-spinner></mat-spinner>

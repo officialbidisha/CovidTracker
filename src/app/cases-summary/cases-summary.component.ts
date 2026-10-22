@@ -63,7 +63,7 @@ export class CasesSummaryComponent implements OnInit, AfterViewInit {
           position: i + 1,
           country: this.country[i],
           confirmed: this.totalConfirmed[i],
-          recovered: this.totalConfirmed[i] - this.totalDeaths[i],
+          recovered: this.totalRecovered[i],
           deaths: this.totalDeaths[i],
         };
         this.dtSource.push(obj);
