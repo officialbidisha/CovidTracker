@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CovidTracker:build"
+            "buildTarget": "CovidTracker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "CovidTracker:build:production"
+              "buildTarget": "CovidTracker:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CovidTracker:build"
+            "buildTarget": "CovidTracker:build"
           }
         },
         "test": {
