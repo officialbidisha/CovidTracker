@@ -5,20 +5,12 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "enableIvy": false,
-    "extendedDiagnostics": {
-      "checks": {
-        "nullishCoalescingNotNullable": "suppress",
-        "optionalChainNotNullable": "suppress"
-      }
-    },
     "strictTemplates": false
   },
   "files": [
     "src/main.ts",
     "src/polyfills.ts"
   ],
-  
   "include": [
     "src/**/*.d.ts"
   ]
